@@ -1,7 +1,9 @@
 using LocalUtilities.FileUtilities;
+using LocalUtilities.Serializations;
 using LocalUtilities.SimpleScript.Data;
 using LocalUtilities.SimpleScript.Serialization;
 using LocalUtilities.StringUtilities;
+using LocalUtilities.UIUtilities;
 using System.Text;
 
 namespace SimpleScriptSerialization
@@ -14,65 +16,39 @@ namespace SimpleScriptSerialization
         [STAThread]
         static void Main()
         {
-            var data = new FormData() { Datas = [new(), new()] };
-            //var a = new FormDataSerialization() { Source = data }.SaveToFile();
-            var b = new FormDataSerialization().LoadFromFile(out var m);
+            var data = new TestFormDataSerialization("ShitForm").LoadFromFile(out var m);
+            new TestFormDataSerialization("ShitForm") { Source = data }.SaveToFile();
 
             Application.Run(new Form1());
         }
     }
 
-    public class FormData
+    public class TestFormData : FormData
     {
-        public Size MinimumSize { get; set; }
+        public override Size MinimumSize { get; set; }
 
-        public virtual Size Size { get; set; }
-
-        public virtual Point Location { get; set; }
-
-        public virtual FormWindowState WindowState { get; set; } = FormWindowState.Normal;
-
-        public virtual int Padding { get; set; } = 12;
-
-        public List<FormData> Datas { get; set; } = [];
+        public List<TestFormData> Datas { get; set; } = [];
     }
 
-    public class FormDataSerialization : SsSerialization<FormData>
+    public class TestFormDataSerialization : FormDataSerialization<TestFormData>
     {
-        public FormDataSerialization() : base(new())
+        public TestFormDataSerialization(string localName) : base(localName, new())
         {
             OnSerialize += FormData_Serialize;
             OnDeserialize += FormData_Deserialize;
         }
 
-        public override string LocalName => nameof(FormData);
-
         private void FormData_Serialize(SsSerializer serializer)
         {
-            serializer.WriteTag(nameof(Source.MinimumSize), (Source.MinimumSize.Width, Source.MinimumSize.Height).ToArrayString());
-            serializer.WriteTag(nameof(Source.Location), (Source.Location.X, Source.Location.Y).ToArrayString());
-            serializer.WriteTag(nameof(Source.WindowState), Source.WindowState.ToString());
-            serializer.WriteTag(nameof(Source.Padding), Source.Padding.ToString());
-            Source.Datas.Serialize(serializer, new FormDataSerialization());
+            Source.Datas.Serialize(serializer, new TestFormDataSerialization(LocalName));
         }
 
         private void FormData_Deserialize(Token token)
         {
-            if (token is TagValues tagValues)
+            if (token is Scope scope)
             {
-                if (token.Name is nameof(Source.MinimumSize))
-                    Source.MinimumSize = tagValues.Tag.ToSize(Source.MinimumSize);
-                else if (token.Name is nameof(Source.Location))
-                    Source.Location = tagValues.Tag.ToPoint(Source.Location);
-                else if (token.Name is nameof(Source.WindowState))
-                    Source.WindowState = tagValues.Tag.ToEnum<FormWindowState>();
-                else if (token.Name is nameof(Source.Padding))
-                    Source.Padding = tagValues.Tag.ToInt(Source.Padding);
-            }
-            else if (token is Scope scope)
-            {
-                if (token.Name is nameof(FormData))
-                    Source.Datas.Add(SsDeserializeTool.Deserialize(new FormDataSerialization(), scope));
+                if (scope.Name == LocalName)
+                    Source.Datas.Add(SsDeserializeTool.Deserialize(new TestFormDataSerialization(LocalName), scope));
             }
         }
     }
