@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_lib\Hoi4ScriptParser\Hoi4ScriptParser\Hoi4ScriptParser.csproj" />
+    <ProjectReference Include="..\_lib\LocalUtilities\LocalUtilities.csproj" />
   </ItemGroup>
 
 </Project>

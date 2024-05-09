@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleScriptSerialization", "SimpleScriptSerialization\SimpleScriptSerialization.csproj", "{CA2865B9-5DEE-4A46-ABFC-4D9A3C483D32}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hoi4ScriptParser", "_lib\Hoi4ScriptParser\Hoi4ScriptParser\Hoi4ScriptParser.csproj", "{0D92D9DE-74A8-4423-BBED-D5B0A88B3BAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleScriptSerialization", "SimpleScriptSerialization\SimpleScriptSerialization.csproj", "{CA2865B9-5DEE-4A46-ABFC-4D9A3C483D32}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalUtilities", "_lib\LocalUtilities\LocalUtilities.csproj", "{109AD465-1B6A-4D1A-BC28-856C73022EF3}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{CA2865B9-5DEE-4A46-ABFC-4D9A3C483D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA2865B9-5DEE-4A46-ABFC-4D9A3C483D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA2865B9-5DEE-4A46-ABFC-4D9A3C483D32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D92D9DE-74A8-4423-BBED-D5B0A88B3BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D92D9DE-74A8-4423-BBED-D5B0A88B3BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D92D9DE-74A8-4423-BBED-D5B0A88B3BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D92D9DE-74A8-4423-BBED-D5B0A88B3BAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{109AD465-1B6A-4D1A-BC28-856C73022EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{109AD465-1B6A-4D1A-BC28-856C73022EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{109AD465-1B6A-4D1A-BC28-856C73022EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
