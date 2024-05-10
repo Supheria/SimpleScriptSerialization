@@ -16,11 +16,32 @@ namespace SimpleScriptSerialization
         [STAThread]
         static void Main()
         {
-            var data = new TestFormDataSerialization("ShitForm").LoadFromFile(out var m);
+            var rect = new Point(1, 2);
+            var s = rect.ToArrayString();
+            rect = s.ToPoint(new());
+            //var dic = new Dictionary<string, string>() { ["a "] = "a"};
+            //new TestDictionarySerialization("test") { Source = dic.ToList()}.SaveToFile();
+            var a = new TestDictionarySerialization("test").LoadFromFile(out var m);
+            var dic = a.ToDictionary();
+
+            var data = new TestFormDataSerialization("ShitForm").LoadFromFile(out m);
             new TestFormDataSerialization("ShitForm") { Source = data }.SaveToFile();
 
             Application.Run(new Form1());
         }
+    }
+
+    public class TestDictionarySerialization(string localName) : KeyValuePairsSerialization<string, string>()
+    {
+        public override string LocalName => localName;
+
+        protected override Func<string, string> ReadKey => str => str;
+
+        protected override Func<string, string> ReadValue => str => str;
+
+        protected override Func<string, string> WriteKey => str => str;
+
+        protected override Func<string, string> WriteValue => str => str;
     }
 
     public class TestFormData : FormData
