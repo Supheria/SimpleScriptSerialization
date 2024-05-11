@@ -25,7 +25,7 @@ namespace SimpleScriptSerialization
             var dic = a.ToDictionary();
 
             var data = new TestFormDataSerialization("ShitForm").LoadFromFile(out m);
-            new TestFormDataSerialization("ShitForm") { Source = data }.SaveToFile();
+            new TestFormDataSerialization("ShitForm") { Source = data }.SaveToFile(true);
 
             Application.Run(new Form1());
         }
